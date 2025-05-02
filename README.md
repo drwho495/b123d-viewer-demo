@@ -16,3 +16,6 @@ made a dumb mistake that needs to get fixed.
 ## Running this
 I have not created a pip module, and this isn't really formatted
 for that yet, but one is (hopefully) coming soon.
+
+If you want to look at a demo of how the user will use this, then goto
+library/TestObject.py
