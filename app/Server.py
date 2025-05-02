@@ -10,9 +10,10 @@ from Object import Object
 import threading
 import sys
 
-sys.path.insert(
-    0, "/home/hypocritical/b123d-projs/custom-viewer-testing/viewer-app/"
-)  # jank
+location = "/".join(__file__.split("/")[0 : len(__file__.split("/")) - 2])
+
+sys.path.insert(0, location)  # less jank than before, but still jank
+
 from SocketCommands import SocketCommands
 
 

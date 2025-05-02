@@ -8,9 +8,10 @@ from PyQt5.QtCore import pyqtSlot, pyqtSignal, Qt, QEvent
 from build123d import *
 import build123d as b123d
 
-sys.path.insert(
-    0, "/home/hypocritical/b123d-projs/custom-viewer-testing/viewer-app/"
-)  # jank
+location = "/".join(__file__.split("/")[0 : len(__file__.split("/")) - 2])
+
+sys.path.insert(0, location)  # less jank than before, but still jank
+
 from SocketCommands import SocketCommands
 import time
 
