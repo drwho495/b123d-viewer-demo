@@ -3,6 +3,7 @@ class Object:
         self.name = name
         self.id = id
         self.aisShape = aisShape
+        self.forceUpdate = False
         self.stale = False
 
     def checkID(self, newID):

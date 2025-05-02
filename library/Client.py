@@ -9,7 +9,6 @@ from build123d import *
 import build123d as b123d
 
 location = "/".join(__file__.split("/")[0 : len(__file__.split("/")) - 2])
-
 sys.path.insert(0, location)  # less jank than before, but still jank
 
 from SocketCommands import SocketCommands
@@ -60,7 +59,17 @@ class SocketClient:
 
         self._socket.sendall(bytecode)
 
-    def sendObject(self, name, part):
+    def getObjectID(self, name):
+        self._send(SocketCommands.GET_OBJECT_ID.name.encode(), 0.05)
+        self._send(name.encode(), 0.05)
+
+        return float(self._socket.recv(1024).decode())
+    
+    def skipObject(self, name):
+        self._send(SocketCommands.SKIP_OBJECT.name.encode(), 0.05)
+        self._send(name.encode(), 0.05)
+
+    def sendObject(self, name, part, forceUpdate, id):
         # Might need to be moved to a library #
         if hasattr(part, "part"):
             ocpShape = part.part.wrapped
@@ -79,30 +88,37 @@ class SocketClient:
         write_buffer.close()
 
         if self._socket != None:
-            self._send((SocketCommands.UPDATE_OBJECT.name + " " + name).encode(), 0)
+            self._send(SocketCommands.UPDATE_OBJECT.name.encode(), 0.05)
+            self._send(name.encode(), 0.05)
 
             print(len(serialized_bytes))
 
             self._send(serialized_bytes, 0.1)
-            self._send(SocketCommands.TRANSMISSION_OVER.name.encode(), 0.1)
+            self._send(SocketCommands.TRANSMISSION_OVER.name.encode(), 0.01)
+
+            if forceUpdate != False or id != -1:
+                self._send(SocketCommands.UPDATE_OBJECT_PROP.name.encode(), 0.01)
+                self._send(name.encode(), 0.1)
+                self._send(str(forceUpdate).encode(), 0.01)
+                self._send(str(id).encode(), 0.01)
 
 
 # print(str(wheel.bounding_box()))
 
-if __name__ == "__main__":
-    sClient = SocketClient(b123d=b123d)
-    status = sClient.connect()
+# if __name__ == "__main__":
+#     sClient = SocketClient(b123d=b123d)
+#     status = sClient.connect()
 
-    print(status)
+#     print(status)
 
-    with BuildPart() as part:
-        with Locations((0, 0, 0)):
-            Box(15, 15, 15)
+#     with BuildPart() as part:
+#         with Locations((0, 0, 0)):
+#             Box(15, 15, 15)
 
-    startTime = time.time()
+#     startTime = time.time()
 
-    sClient.sendObject("hello", part)
+#     sClient.sendObject("hello", part)
 
-    print(time.time() - startTime)
+#     print(time.time() - startTime)
 
-    sClient.close()
+#     sClient.close()

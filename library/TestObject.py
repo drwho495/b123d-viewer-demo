@@ -2,7 +2,9 @@ from build123d import *
 from ViewerLib import *
 
 with BuildPart() as part:
-    Box(15, 15, 15)
+    Box(30, 15, 15)
+
+part.part.edges()
 
 # addObject("cube1", part)
 addObject("cube2", part)

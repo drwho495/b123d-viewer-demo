@@ -2,10 +2,13 @@ from enum import Enum
 
 
 class SocketCommands(Enum):
-    CLOSE_CONNECTION = "CLOSE_CONNECTION"
-    CONNECTION_SUCCESS = "CONNECTION_SUCCESS"
-    GET_OBJECT_ID_FROM_NAME = "GET_OBJECT_ID_FROM_NAME"  # followed by name
-    UPDATE_OBJECT = "UPDATE_OBJECT"  # followed by name
-    READY = "READY"
-    RECIEVED = "RECIEVED"
-    TRANSMISSION_OVER = "TRANSMISSION_OVER"
+    CLOSE_CONNECTION = 1
+    CONNECTION_SUCCESS = 2
+    GET_OBJECT_ID_FROM_NAME = 3  # followed by name
+    UPDATE_OBJECT = 4  # followed by name
+    READY = 5
+    RECIEVED = 6
+    TRANSMISSION_OVER = 7
+    UPDATE_OBJECT_PROP = 8
+    GET_OBJECT_ID = 9
+    SKIP_OBJECT = 10

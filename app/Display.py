@@ -2,15 +2,9 @@
 from libs.occt_widget import OCCTWidget
 from PyQt5.QtWidgets import QWidget, QApplication
 from PyQt5.QtCore import (
-    pyqtSlot,
-    QMetaObject,
-    Q_ARG,
     pyqtSignal,
     QThread,
-    Qt,
-    QEvent,
     QTimer,
-    QEventLoop,
 )
 import OCP
 import time
