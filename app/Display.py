@@ -30,21 +30,14 @@ class DisplayManager:
         self._runUpdateObj = True
         self._objUpdate = 1
         self._loopMethods = []
-        self._displayedObjects = []
 
     def addObj(self, AIS_Shape):
-        self._displayedObjects.append(object)
-
         self._widget.context.Display(AIS_Shape, True)
 
     def removeObj(self, AIS_Shape):
-        self._displayedObjects.append(object)
-
         self._widget.context.Remove(AIS_Shape, True)
 
     def updateObj(self, AIS_Shape):
-        self._displayedObjects.append(object)
-
         self._widget.context.Remove(AIS_Shape, True)
         self._widget.context.Display(AIS_Shape, True)  # Bug Workaround
 
